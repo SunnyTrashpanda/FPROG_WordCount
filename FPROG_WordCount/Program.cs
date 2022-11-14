@@ -56,16 +56,14 @@ namespace FPROG_WordCount
             //string dirPath = @"C:\Users\Marlies\source\repos\SunnyTrashpanda\FPROG_WordCount\testfiles";
             //string fileExtension = ".txt";
 
-            string dirPath;
-            string fileExtension;
 
             if (Environment.GetCommandLineArgs().Length > 2)
             {
                 char[] delimiters = Enumerable.Range(0, 256).Select(i => (char)i).Where(c => Char.IsWhiteSpace(c) || Char.IsPunctuation(c)).ToArray();
 
-                dirPath = Environment.GetCommandLineArgs()[1];
+                string dirPath = Environment.GetCommandLineArgs()[1];
                 //TODO wenn keine file extension mitgegeben wird
-                fileExtension = Environment.GetCommandLineArgs()[2];
+                string fileExtension = Environment.GetCommandLineArgs()[2];
 
                 var files = GetFilesListFromDirectory(dirPath, fileExtension);
 
