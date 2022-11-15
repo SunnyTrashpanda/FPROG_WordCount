@@ -40,64 +40,53 @@ namespace FPROG_WordCount
 
         public static void printWords(IEnumerable<KeyValuePair<string, int>> wordlist)
         {
-            foreach (var c in wordlist.OrderByDescending(x => x.Value))
+            foreach (var c in wordlist)
             {
-                Console.Write($"{c.Key} -> {c.Value}____");
+                Console.WriteLine($"{c.Key}  {c.Value}");
             }
 
         }
 
-        
+        public static Func<Tuple<string, string>> GetPathAndFile = () =>
+        {
+            Tuple<string, string> pathAndFile = new Tuple<string, string>(Environment.GetCommandLineArgs()[1], Environment.GetCommandLineArgs()[2]);
+            return pathAndFile;
+        };
+
+        public static Func<char[]> GetDelimiters = () =>
+        {
+            return Enumerable.Range(0, 256).Select(i => (char)i).Where(c => Char.IsWhiteSpace(c) || Char.IsPunctuation(c)).ToArray();
+        };
 
         
+        //empty entrys ignorieren 
+
+        //magic numbers 
+
+
         //DISCLAIMER: muss noch alles überprüft werden ob funktional ! 
         static void Main(string[] args)
         {
-            //string dirPath = @"C:\Users\Marlies\source\repos\SunnyTrashpanda\FPROG_WordCount\testfiles";
-            //string fileExtension = ".txt";
-
 
             if (Environment.GetCommandLineArgs().Length > 2)
             {
-                char[] delimiters = Enumerable.Range(0, 256).Select(i => (char)i).Where(c => Char.IsWhiteSpace(c) || Char.IsPunctuation(c)).ToArray();
 
-                string dirPath = Environment.GetCommandLineArgs()[1];
-                //TODO wenn keine file extension mitgegeben wird
-                string fileExtension = Environment.GetCommandLineArgs()[2];
+                var pathAndFile = GetPathAndFile();
 
-                var files = GetFilesListFromDirectory(dirPath, fileExtension);
+                var files = GetFilesListFromDirectory(pathAndFile.Item1, pathAndFile.Item2);
+
+                var delimiters = GetDelimiters();
 
                 var counts = MapReduce(files, //source
                                         path => File.ReadLines(path).SelectMany(line => line.Split(delimiters)), //map 
                                         word => word, //key
-                                                      //word => RemoveSpecialChars(word), //key
                                         group => new[] { new KeyValuePair<string, int>(group.Key, group.Count()) }); ; //reduce
 
-                printWords(counts);
+                var orderedCounts = counts.OrderByDescending(x => x.Value);
+
+                printWords(orderedCounts);
             }
 
         }
-
-
-        //NOT NEEDED
-        // kopiert von stack overflow --> ' and "
-        public static string RemoveSpecialCharacters(string input)
-        {
-            Regex r = new Regex(
-                          "(?:[^a-zA-Z0-9 ]|(?<=['\"])s)",
-                          RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
-            return r.Replace(input, String.Empty);
-        }
-
-        //braucht man eigentlich nicht, durch die delimiters schon erledigt 
-        public static Func<string, string> RemoveSpecialChars = (input) =>
-        {
-            Regex r = new Regex(
-                          "(?:[^a-zA-Z0-9 ]|(?<=['\"])s)",
-                          RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
-            return r.Replace(input, String.Empty);
-        };
-
-
     }
 }
