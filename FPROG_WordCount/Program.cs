@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.IO;
@@ -17,6 +18,8 @@ namespace FPROG_WordCount
         //zeitmessung
         //lessons learned (LINQ is beste)
         //
+        // C:\Users\sagan\source\repos\SunnyTrashpanda\FPROG_WordCount\testfiles .txt
+        // C:\Users\Marlies\source\repos\SunnyTrashpanda\FPROG_WordCount\testfiles .txt
 
         //lambda with 2 arguments
         public static Func<string, string, IEnumerable<string>> GetFilesListFromDirectory = (dirPath, fileExtension) =>
@@ -58,12 +61,24 @@ namespace FPROG_WordCount
             }
         }
 
+        // NON-FUNCTIONAL METHOD
+        public static void printTime(Stopwatch stopwatch)
+        {
+            Console.WriteLine("Time elapsed: {0}s", stopwatch.Elapsed.TotalSeconds);
+        }
+
         static void Main(string[] args)
         {
             if (Environment.GetCommandLineArgs().Length > 2)
             {
                 var pathIndexFromProgrammArgs = 1;
                 var fileIndexFromProgrammArgs = 2;
+
+                // Create new stopwatch.
+                Stopwatch stopwatch = new Stopwatch();
+
+                // Begin timing.
+                stopwatch.Start();
 
                 var pathAndFile = GetPathAndFile(pathIndexFromProgrammArgs, fileIndexFromProgrammArgs);
 
@@ -78,8 +93,13 @@ namespace FPROG_WordCount
 
                 var orderedCounts = counts.OrderByDescending(x => x.Value).ThenByDescending(x => x.Key);
 
+                // Stop timing.
+                stopwatch.Stop();
+
                 //non functional part 
                 printWords(orderedCounts);
+                printTime(stopwatch);
+                
             }
         }
     }
