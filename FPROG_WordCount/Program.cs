@@ -12,15 +12,6 @@ namespace FPROG_WordCount
 {
     public static class Program
     {
-
-        //TODO
-        //tests
-        //zeitmessung
-        //lessons learned (LINQ is beste)
-        //
-        // C:\Users\sagan\source\repos\SunnyTrashpanda\FPROG_WordCount\testfiles .txt
-        // C:\Users\Marlies\source\repos\SunnyTrashpanda\FPROG_WordCount\testfiles .txt
-
         //lambda with 2 arguments
         public static Func<string, string, IEnumerable<string>> GetFilesListFromDirectory = (dirPath, fileExtension) =>
          {  
