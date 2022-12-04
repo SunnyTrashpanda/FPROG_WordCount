@@ -1,8 +1,7 @@
 {
   "profiles": {
     "FPROG_WordCount": {
-      "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\Marlies\\source\\repos\\SunnyTrashpanda\\FPROG_WordCount\\testfiles .txt"
+      "commandName": "Project"
     }
   }
 }
