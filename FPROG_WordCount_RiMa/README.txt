@@ -10,13 +10,13 @@
 
 ## HOW TO compile (Windows)
 - dotnet 6 sdk has to be installed
-- use the cmd commands in the terminal in the project directory: 
+- use the cmd commands in the terminal in the source_code directory: 
 dotnet restore
 dotnet build
 
 ## HOW TO run the Unit Tests
 - dotnet 6 sdk has to be installed
-- use the cmd commands in the terminal in the project directory: 
+- use the cmd commands in the terminal in the source_code directory: 
 dotnet test
 
 ### Disclaimer
