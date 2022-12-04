@@ -1,6 +1,6 @@
 # FPROG_WordCount
 
-Team Members: 
+### Team Members
 - Marlies Rieder
 - Lucienne Angeli Maramara
 
