@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace FPROG_WordCount   
 {
-    internal static class Program
+    public static class Program
     {
 
         //TODO
