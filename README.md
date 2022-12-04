@@ -24,4 +24,4 @@ eg. "FPROG_WordCount.exe .\testfiles .txt" --> same as in the .bat file
 
 
 ### Step three
--press "enter" and review the printed results
+- press "enter" and review the printed results
