@@ -9,7 +9,7 @@
 - programm is written in C# on Visual Studio --> Windows environment
 
 ### Disclaimer
-Sind this subject is about functional programming, project was developed in a way that all imputs are correct:
+Since this subject is about functional programming, the project was developed in a way that all inputs are correct:
 - path should exist and be written correct
 - there should always be 2 input parameters (path and fileending)
 
